@@ -21,8 +21,8 @@ function addImage(e) {
   });
 }
 
-async function downloadImage(url) {
-  const response = await fetch(url);
+async function downloadImage(obj) {
+  const response = await fetch(obj.url);
   if (!response.ok) {
     throw new Error(`Failed to load image's URL: ${url}`);
   }
