@@ -10,6 +10,7 @@ const images = [
 
 function addImage(e) {
   e.preventDefault();
+
   let promises = images.map(downloadImage);
   let allProm = Promise.all(promises);
   allProm.then((blobs) => {
@@ -23,10 +24,8 @@ function addImage(e) {
 
 async function downloadImage(obj) {
   const response = await fetch(obj.url);
-  if (!response.ok) {
-    throw new Error(`Failed to load image's URL: ${url}`);
-  }
-  return response.blob(); // Use blob for image data
+  if (!response.ok) throw new Error(`Failed to load image's URL: ${obj.url}`);
+  else return response.blob();
 }
 
 btn.addEventListener("click", addImage);
