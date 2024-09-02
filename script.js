@@ -13,10 +13,10 @@ function addImage(e) {
 
   let promises = images.map(downloadImage);
   let allProm = Promise.all(promises);
-  allProm.then((blobs) => {
-    blobs.forEach((blob) => {
+  allProm.then((urls) => {
+    urls.forEach((url) => {
       let img = document.createElement("img");
-      img.src = URL.createObjectURL(blob);
+      img.src = url;
       output.appendChild(img);
     });
   });
@@ -25,7 +25,7 @@ function addImage(e) {
 async function downloadImage(obj) {
   const response = await fetch(obj.url);
   if (!response.ok) throw new Error(`Failed to load image's URL: ${obj.url}`);
-  else return response.blob();
+  else return obj.url;
 }
 
 btn.addEventListener("click", addImage);
